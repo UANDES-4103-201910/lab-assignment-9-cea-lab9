@@ -1,19 +1,24 @@
 class SessionsController < ApplicationController
-	def new
-	end
+def new
+end
 
-	def create
-		#complete this method
-		@user = User.find_or_create_from_auth_hash(auth_hash)
-    	self.current_user = @user
-    	redirect_to '/'
-	end
+def create
+  	user = User.find_by_email(params[:email])
+  	if user && user.authenticate(params[:password])
+  	  	session[:user_id] = user.id
+    	redirect_to root_url, notice: "Logged in!"
+  	else
+    	flash.now.alert = "Email or password is invalid"
+    	render "new"
+  	end
+end
 
 	def destroy
-		#complete this method
+  		session[:user_id] = nil
+	  	redirect_to root_url, notice: "Logged out!"
 	end
 
 	def auth_hash
     	request.env['omniauth.auth']
-  	end
+	end
 end

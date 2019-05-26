@@ -10,5 +10,10 @@ Rails.application.routes.draw do
   get '/sign_in' => 'registrations#new', as: :registrations
   post '/sign_in' => 'registrations#create', as: :sign_in
   #match '/auth/:provider/callback', to: 'sessions#create'
+  get 'signup', to: 'users#new', as: 'signup'
+  get 'login', to: 'sessions#new', as: 'login'
+  get 'logout', to: 'sessions#destroy', as: 'logout'
 
+  resources :users
+  resources :sessions
 end

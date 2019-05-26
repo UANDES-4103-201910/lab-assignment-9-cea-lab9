@@ -67,3 +67,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'therubyracer'
 gem 'omniauth-facebook'
+gem 'bcrypt-ruby', '~> 3.0.0'
